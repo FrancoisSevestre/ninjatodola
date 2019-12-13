@@ -3,25 +3,25 @@ from classes.ninjatodola_objects import ListeDeTaches
 
 
 def launch(CONFIG_SAUVEGARDE, EMPLACEMENT_SAUVEGARDE):
-    """Looking for existing config files and LDT save and returning the current_object."""
+    """Looking for existing config files and LDT save and returning the save_file, main_list and current_object."""
 
-    #essai d'ouverture d'une fichier .save present dans le fichier config
+    #Try to open the .save file in the config directory
     try:
-        fichier_sauvegarde = recuperer_donnees(CONFIG_SAUVEGARDE)
+        save_file = recuperer_donnees(CONFIG_SAUVEGARDE)
     except FileNotFoundError:
-        fichier_sauvegarde = EMPLACEMENT_SAUVEGARDE + "liste_principale"
-        deposer_donnees(fichier_sauvegarde, CONFIG_SAUVEGARDE, "wb")
-    fichier_sauvegarde = recuperer_donnees(CONFIG_SAUVEGARDE)
+        save_file = EMPLACEMENT_SAUVEGARDE + "main_list"
+        deposer_donnees(save_file, CONFIG_SAUVEGARDE, "wb")
+    save_file = recuperer_donnees(CONFIG_SAUVEGARDE)
 
-    #chargement de la sauvegarde ou creation d'une nouvelle 
+    #Loading the save or creation of a new one 
     try:
-        liste_principale = recuperer_donnees(fichier_sauvegarde)    
+        main_list = recuperer_donnees(save_file)    
     except FileNotFoundError:
-        liste_principale = ListeDeTaches("NinjaTODOla", None, None, 0) #creation d'un nouvelle arbre
-        deposer_donnees(liste_principale, fichier_sauvegarde, "wb")
+        main_list = ListeDeTaches("NinjaTODOla", None, None, 0) #creation of a new tree
+        deposer_donnees(main_list, save_file, "wb")
 
-    liste_principale = recuperer_donnees(fichier_sauvegarde)
-    objet_en_cours = liste_principale
+    main_list = recuperer_donnees(save_file)
+    current_object = main_list
 
-    start_tuple = (fichier_sauvegarde, liste_principale, objet_en_cours)
+    start_tuple = (save_file, main_list, current_object)
     return start_tuple
