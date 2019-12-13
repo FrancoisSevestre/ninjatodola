@@ -23,6 +23,7 @@ def launch():
         deposer_donnees(liste_principale, fichier_sauvegarde, "wb")
 
     liste_principale = recuperer_donnees(fichier_sauvegarde)
-    current_object = liste_principale
+    objet_en_cours = liste_principale
 
-    return current_object
+    start_tuple = (fichier_sauvegarde, liste_principale, objet_en_cours)
+    return start_tuple

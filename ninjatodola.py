@@ -19,7 +19,10 @@ from fonctions.compose_output import *
 from fonctions.launch_fonction import launch
 
 #Recherche de sauvegarde
-objet_en_cours = launch()
+start_tuple = launch()
+fichier_sauvegarde = start_tuple[0]
+liste_principale = start_tuple[1]
+objet_en_cours = start_tuple[2]
 
 #variables:
 cache = True
