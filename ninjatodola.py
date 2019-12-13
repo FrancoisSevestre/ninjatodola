@@ -18,8 +18,11 @@ from classes.thread import RepresentateurLDT
 from fonctions.compose_output import *
 from fonctions.launch_fonction import launch
 
+CONFIG_SAUVEGARDE = "config/save"
+EMPLACEMENT_SAUVEGARDE = "sauvegardes/"
+
 #Recherche de sauvegarde
-start_tuple = launch()
+start_tuple = launch(CONFIG_SAUVEGARDE, EMPLACEMENT_SAUVEGARDE)
 fichier_sauvegarde = start_tuple[0]
 liste_principale = start_tuple[1]
 objet_en_cours = start_tuple[2]
