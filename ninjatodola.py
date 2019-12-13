@@ -16,26 +16,10 @@ from fonctions.print_liste import *
 from classes.ninjatodola_objects import *
 from classes.thread import RepresentateurLDT
 from fonctions.compose_output import *
+from fonctions.launch_fonction import launch
 
-#essai d'ouverture d'une fichier .save present dans le fichier config
-CONFIG_SAUVEGARDE = "config/save"
-EMPLACEMENT_SAUVEGARDE = "sauvegardes/"
-try:
-    fichier_sauvegarde = recuperer_donnees(CONFIG_SAUVEGARDE)
-except FileNotFoundError:
-    fichier_sauvegarde = EMPLACEMENT_SAUVEGARDE + "liste_principale"
-    deposer_donnees(fichier_sauvegarde, CONFIG_SAUVEGARDE, "wb")
-fichier_sauvegarde = recuperer_donnees(CONFIG_SAUVEGARDE)
-
-#chargement de la sauvegarde ou creation d'une nouvelle 
-try:
-    liste_principale = recuperer_donnees(fichier_sauvegarde)    
-except FileNotFoundError:
-    liste_principale = ListeDeTaches("NinjaTODOla", None, None, 0) #creation d'un nouvelle arbre
-    deposer_donnees(liste_principale, fichier_sauvegarde, "wb")
-
-liste_principale = recuperer_donnees(fichier_sauvegarde)
-objet_en_cours = liste_principale
+#Recherche de sauvegarde
+objet_en_cours = launch()
 
 #variables:
 cache = True
