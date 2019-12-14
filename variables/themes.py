@@ -30,9 +30,9 @@ clignotant = "\33[5m {}\x1b[0m"
 #association des couleurs aux themes
 if theme_status == "Normal":#couleurs par defaut
     couleur_app = couleur_verte
-    hightlighting = surligne_vert
+    hightlight_LDT = surligne_vert
     police_standard = normal
-    couleur_indenteur = clignotant.format(couleur_bleu)
+    couleur_indenteur = couleur_bleu
     couleur_numero_position = couleur_verte
     couleur_output = couleur_bleu
     #theme separateur
@@ -55,7 +55,7 @@ if theme_status == "Normal":#couleurs par defaut
 
 if theme_status == "Dark":#couleurs par defaut
     couleur_app = couleur_violet
-    hightlighting = surligne_noir
+    hightlight_LDT = surligne_noir
     police_standard = couleur_gris
     couleur_indenteur = clignotant.format(couleur_noir)
     couleur_numero_position = couleur_mauve
@@ -79,7 +79,7 @@ if theme_status == "Dark":#couleurs par defaut
 
 if theme_status == "Superman":#couleurs par defaut
     couleur_app = couleur_jaune
-    hightlighting = surligne_rouge
+    hightlight_LDT = surligne_rouge
     police_standard = couleur_bleu
     couleur_indenteur = clignotant.format(couleur_jaune)
     couleur_numero_position = couleur_rouge
@@ -103,7 +103,7 @@ if theme_status == "Superman":#couleurs par defaut
 
 if theme_status == "Rainbow":#couleurs par defaut
     couleur_app = couleur_verte
-    hightlighting = surligne_bleu
+    hightlight_LDT = surligne_bleu
     police_standard = couleur_jaune
     couleur_indenteur = clignotant.format(couleur_violet)
     couleur_numero_position = couleur_rouge
