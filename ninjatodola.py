@@ -16,6 +16,8 @@ from fonctions.print_liste import *
 from classes.ninjatodola_objects import *
 from classes.thread import RepresentateurLDT
 from fonctions.compose_output import *
+from fonctions.print_LDT import *
+
 
 #essai d'ouverture d'une fichier .save present dans le fichier config
 CONFIG_SAUVEGARDE = "config/save"
@@ -59,7 +61,10 @@ while True:
     choix_objet_str = objet_en_cours.choix_objet_str
     choix_menu_principal_str = print_liste(items_menu_principal_str + choix_objet_str)
 
-    print(repr(liste_principale))
+    a = liste_principale.repr_object()
+    b = print_LDT(a)
+    print(b)
+
 
     # comp = compose_output2(repr(liste_principale), choix_menu_principal_str, 70)
     # print(comp)

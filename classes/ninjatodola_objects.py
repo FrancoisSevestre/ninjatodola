@@ -158,6 +158,21 @@ class ListeDeTaches(NinjatodolaObject):
             representation += color(" ...", couleur_indenteur) #Ne rien montrer
         return representation
 
+    def repr_object(self):
+        """returns a tuple containing a string representating the object type, its rank, its hightlight status, its representation, list_of_contend_object"""
+
+        object_tuple = (self.nom_classe, self.rang_indentation, self.position_liste_mere, self.hightlight, self.nom, self.show)
+        liste_de_tuple = []
+        liste_de_tuple.append(object_tuple)
+
+        if self.show:
+            for item in self.liste_contenu: #pour chaque objet dans la liste
+                repr_object_from_list_contenu = item.repr_object() #generate a liste of repr_object
+                for r in repr_object_from_list_contenu: # add each tuple in the liste
+                    liste_de_tuple.append(r)
+        return liste_de_tuple
+
+
     def creation_sous_liste(self, nom, position):
         """Permet la création et l'ajout d'une sous-liste à la position donnée"""
         if nom == "SEP":
@@ -285,7 +300,7 @@ class Commande(NinjatodolaObject):
 
     def __init__(self, liste_mere, position_liste_mere, commande=None):
         NinjatodolaObject.__init__(self, None, liste_mere, position_liste_mere, None, is_a_list=False, is_executable=False)
-        self.nom_classe = "ApplicationScript" #Changer le nom de la classe pour __str__
+        self.nom_classe = "Commande" #Changer le nom de la classe pour __str__
         self.choix_objet = ["r", "e", "k"] #Liste des choix possibles
         self.choix_objet_str = ["Menu d'objet:", "- Réecrire la commande (r)", "- Executer la commande (e)", "- Supprimer la liste (k)"] #Liste des str correspondantes
         if commande:
@@ -298,6 +313,15 @@ class Commande(NinjatodolaObject):
             return color(self.code, hightlight_COM)
         else:
             return color(self.code, couleur_COM)
+
+    def repr_object(self):
+        """returns a tuple containing a string representating the object type, its rank, its hightlight status, its representation, list_of_contend_object"""
+
+        object_tuple = (self.nom_classe, self.rang_indentation, self.position_liste_mere, self.hightlight, self.code)
+        # liste_de_tuple = []
+        # liste_de_tuple.append(object_tuple)
+        # return liste_de_tuple
+        return object_tuple
 
     def entrer_une_commande(self):
         """Permet d'entrer une commande"""
@@ -384,6 +408,28 @@ class Application(NinjatodolaObject):
                 representation += color(repr(item), police_standard) #ecrire le nom de l'objet
                 position += 1
         return representation
+
+    def repr_object(self):
+        """returns a tuple containing a string representating the object type, its rank, its hightlight status, its representation, list_of_contend_object"""
+        if self.aff: #Si le resultat de la liste doit etre affiché
+            script_complet = "" # reconstitution du script
+            for ligne in self.liste_contenu:
+                script_complet = script_complet + "\n" + str(ligne.code)
+            output = self.execution_output(script_complet) #recuperation du resultat de l'execution
+            object_tuple = (self.nom_classe, self.rang_indentation, self.position_liste_mere, self.hightlight, output, True)
+        else:
+            object_tuple = (self.nom_classe, self.rang_indentation, self.position_liste_mere, self.hightlight, self.nom, self.show)
+        liste_de_tuple = []
+        liste_de_tuple.append(object_tuple)
+
+        if self.show:
+            for item in self.liste_contenu: #pour chaque objet dans la liste
+                repr_object_from_list_contenu = item.repr_object() #generate a liste of repr_object
+                # for r in repr_object_from_list_contenu: # add each tuple in the liste
+                #     liste_de_tuple.append(r)
+                liste_de_tuple.append(repr_object_from_list_contenu)
+        
+        return liste_de_tuple
 
     def update(self):
         """Méthode permettant de mettre à jour la liste_mere et le rang des objets contenus"""
@@ -481,6 +527,7 @@ class Separateur(NinjatodolaObject):
     """En cours de fabrication..."""
     def __init__(self, liste_mere, position_liste_mere, rang_indentation):
         NinjatodolaObject.__init__(self, "None", liste_mere, position_liste_mere, rang_indentation, is_a_list=False, is_executable=False)
+        self.nom_classe = "Separateur"
         self.choix_objet = ["k", "X"]
         self.choix_objet_str = ["\nMenu d'objet:", "- Supprimer le séparateur (k)", "- Couper (X)"]
 
@@ -492,6 +539,15 @@ class Separateur(NinjatodolaObject):
         else:
             representation += color(motif, couleur_SEP)
         return representation
+
+    def repr_object(self):
+        """returns a tuple containing a string representating the object type, its rank, its hightlight status, its representation, list_of_contend_object"""
+
+        object_tuple = (self.nom_classe, self.rang_indentation, self.position_liste_mere, self.hightlight, "")
+        liste_de_tuple = []
+        liste_de_tuple.append(object_tuple)
+
+        return liste_de_tuple
 
     def action_objet(self, choix_retour):
         """Traite un choix d'action spécifique à l'objet venant du menu principal"""
@@ -508,7 +564,7 @@ class Dossier(NinjatodolaObject):
     """Objet dossier."""
     def __init__(self, nom, loc_dossier, liste_mere, position_liste_mere, rang_indentation):
         NinjatodolaObject.__init__(self, nom, liste_mere, position_liste_mere, rang_indentation, is_a_list=True, is_executable=False)
-        self.nom_classe = "ListeDeTaches" #Changer le nom de la classe pour __str__
+        self.nom_classe = "Dossier" #Changer le nom de la classe pour __str__
         self.choix_objet = ["!", "r", "j", "-", "d", "f", "X", "V"] #Liste des choix possibles
         self.choix_objet_str = ["\nMenu d'objet:", "- Montrer/Cacher (!)", "- Renommer (r)", "- Créer un nouveau dossier (d)", "- Créer un nouveau fichier (f)", "- Mettre à jour le dossier (j)", "- Supprimer le dossier (-)", "- Copier le Dossier (X)", "- Coller le Dossier/Fichier (V)"] #Liste des str correspondantes
         if not isinstance(self.liste_mere, Dossier):
@@ -544,6 +600,32 @@ class Dossier(NinjatodolaObject):
                 representation += color(self.nom, couleur_DOS) #appliquer le theme de base
             self.nom = color("Le dossier n'existe plus...", couleur_rouge)
         return representation
+
+    def repr_object(self):
+        """returns a tuple containing a string representating the object type, its rank, its hightlight status, its representation, list_of_contend_object"""
+        if self.existe:
+            # self.update_dossier()
+            pass
+        else:
+            self.nom = "Le dossier n'existe plus"
+        object_tuple = (self.nom_classe, self.rang_indentation, self.position_liste_mere, self.hightlight, self.nom, self.show)
+        liste_de_tuple = []
+        liste_de_tuple.append(object_tuple)
+
+        if self.show:
+            for item in self.liste_contenu: #pour chaque objet dans la liste
+                repr_object_from_list_contenu = item.repr_object() #generate a liste of repr_object
+                for r in repr_object_from_list_contenu: # add each tuple in the liste
+                    liste_de_tuple.append(r)
+        return liste_de_tuple
+
+    def switch_hightlight(self, turn_on=False):
+        """Change le status du surlignage"""
+        if turn_on:
+            self.hightlight = True
+            self.update_dossier()
+        else:
+            self.hightlight = False
 
     def update(self):
         """Void"""
@@ -633,7 +715,7 @@ class Fichier(NinjatodolaObject):
     """Créé l'objet commande, utilisable dans les applications. """
 
     def __init__(self, nom, liste_mere, position_liste_mere, loc_fichier):
-        NinjatodolaObject.__init__(self, nom, liste_mere, position_liste_mere, None, is_a_list=False, is_executable=False)
+        NinjatodolaObject.__init__(self, nom, liste_mere, position_liste_mere, liste_mere.rang_indentation, is_a_list=False, is_executable=False)
         self.nom_classe = "Fichier" #Changer le nom de la classe pour __str__
         self.choix_objet = ["e", "r", "m", "i", "l", "k"] #Liste des choix possibles
         self.choix_objet_str = ["\nMenu d'objet:", "- Executer le fichier (e)", "- Renommer le fichier (r)", "- Modifier le fichier (m)", "- Infos sur le fichier (i)", "- Lire le fichier (l)", "- Supprimer le fichier (k)"] #Liste des str correspondantes
@@ -651,6 +733,15 @@ class Fichier(NinjatodolaObject):
                 return color(self.nom, hightlight_FIC)
         else:
             return color(self.nom, couleur_FIC)
+
+    def repr_object(self):
+        """returns a tuple containing a string representating the object type, its rank, its hightlight status, its representation, list_of_contend_object"""
+
+        object_tuple = (self.nom_classe, self.rang_indentation, self.position_liste_mere, self.hightlight, self.nom)
+        liste_de_tuple = []
+        liste_de_tuple.append(object_tuple)
+
+        return liste_de_tuple
 
     def update(self):
         existe = path.exists(self.loc_fichier)#verifier que le fichier existe toujour (sous ce nom)
