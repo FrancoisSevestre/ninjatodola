@@ -7,7 +7,6 @@ def print_LDT(list_of_tuple):
     # print(list_of_tuple)
     representation = ""
     for item in list_of_tuple:
-
         if item[0] == "ListeDeTaches":
             if item[2] is not None: # if the object is not the main list
                 position = int(item[2]) + 1
@@ -87,6 +86,17 @@ def print_LDT(list_of_tuple):
                 representation += color(item[4], hightlight_FIC)
             else:
                 representation += color(item[4], couleur_FIC)
+
+            representation += "\n"
+
+        if item[0] == "ListLink":
+            position = int(item[2])
+            representation += color("   "*item[1] + "|->  {}".format(str(position + 1)), couleur_indenteur) #add indentation
+            Link_repr = " **~ " + item[4] + "~**"
+            if item[3]: # add hightlight if necessary
+                representation += color(Link_repr, hightlight_LK)
+            else:
+                representation += color(Link_repr, couleur_LK)
 
             representation += "\n"
 
