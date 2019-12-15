@@ -9,7 +9,7 @@ def launch(CONFIG_SAUVEGARDE, EMPLACEMENT_SAUVEGARDE):
     try:
         save_file = recuperer_donnees(CONFIG_SAUVEGARDE)
     except FileNotFoundError:
-        save_file = EMPLACEMENT_SAUVEGARDE + "main_list"
+        save_file = EMPLACEMENT_SAUVEGARDE + "liste_principale"
         deposer_donnees(save_file, CONFIG_SAUVEGARDE, "wb")
     save_file = recuperer_donnees(CONFIG_SAUVEGARDE)
 
