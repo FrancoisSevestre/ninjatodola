@@ -50,6 +50,7 @@ while True:
     choix_objet_str = objet_en_cours.choix_objet_str
     choix_menu_principal_str = print_liste(items_menu_principal_str + choix_objet_str)
 
+    #repr to be rewritten
     a = liste_principale.repr_object()
     b = print_LDT(a)
     print(b)
@@ -195,6 +196,15 @@ while True:
                 if not isinstance(cache, Dossier) and not isinstance(cache, Fichier):
                     print("Impossible de coller ici...")
                     sleep(1)
+        
+        if type(retour) is tuple: # when return is a tuple
+            if retour[0] == "ChangeList":
+                deposer_donnees(liste_principale, fichier_sauvegarde, "wb") #sauvegarde
+                nom_fichier_liste_principale = retour[1]
+                fichier_sauvegarde = EMPLACEMENT_SAUVEGARDE + nom_fichier_liste_principale #changer le nom de l'emplacement de sauvegarde
+                deposer_donnees(fichier_sauvegarde, CONFIG_SAUVEGARDE, "wb") #sauvegarder le nom de l'emplacement dans save
+                liste_principale = recuperer_donnees(fichier_sauvegarde) #charger la nouvelle liste principale
+                objet_en_cours = liste_principale #Remettre la liste à 0
 
         deposer_donnees(liste_principale, fichier_sauvegarde, "wb") #sauvegarde
 

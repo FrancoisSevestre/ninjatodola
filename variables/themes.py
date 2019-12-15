@@ -51,6 +51,9 @@ if theme_status == "Normal":#couleurs par defaut
     #theme dossier
     couleur_DOS = couleur_rouge
     hightlight_DOS = surligne_rouge
+    #theme Link
+    couleur_LK = couleur_verte
+    hightlight_LK = surligne_bleu
 
 
 if theme_status == "Dark":#couleurs par defaut
@@ -76,6 +79,9 @@ if theme_status == "Dark":#couleurs par defaut
     #theme dossier
     couleur_DOS = couleur_rouge
     hightlight_DOS = surligne_rouge
+        #theme Link
+    couleur_LK = couleur_verte
+    hightlight_LK = surligne_bleu
 
 if theme_status == "Superman":#couleurs par defaut
     couleur_app = couleur_jaune
@@ -100,6 +106,9 @@ if theme_status == "Superman":#couleurs par defaut
     #theme dossier
     couleur_DOS = couleur_rouge
     hightlight_DOS = surligne_rouge
+        #theme Link
+    couleur_LK = couleur_verte
+    hightlight_LK = surligne_bleu
 
 if theme_status == "Rainbow":#couleurs par defaut
     couleur_app = couleur_verte
@@ -124,6 +133,9 @@ if theme_status == "Rainbow":#couleurs par defaut
     #theme dossier
     couleur_DOS = couleur_rouge
     hightlight_DOS = surligne_rouge
+        #theme Link
+    couleur_LK = couleur_verte
+    hightlight_LK = surligne_bleu
 
 
 
