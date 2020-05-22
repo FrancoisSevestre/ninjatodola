@@ -30,6 +30,7 @@ objet_en_cours = start_tuple[2]
 
 #variables:
 cache = True
+hidechoice = False
 
 while True:
     clear() #effacer l'écran
@@ -49,6 +50,9 @@ while True:
     #importation des str associés
     choix_objet_str = objet_en_cours.choix_objet_str
     choix_menu_principal_str = print_liste(items_menu_principal_str + choix_objet_str)
+    if hidechoice == True: #cacher le menu si indiqué
+        choix_menu_principal_str = "-Afficher l'aide (h)"
+
 
     #repr to be rewritten
     a = liste_principale.repr_object()
@@ -61,6 +65,11 @@ while True:
 
     choix = menu(choix_menu_principal_str, type_input="unique", verif=True, items=choix_menu_principal, verbose="verbose_status")
 
+    if choix == "h": #changer le status de hidechoice
+        if hidechoice == True:
+            hidechoice = False
+        else:
+            hidechoice = True
 
     if choix == "4": #se déplacer vers la gauche
         try:
